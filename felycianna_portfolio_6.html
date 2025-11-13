@@ -844,7 +844,8 @@
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
 
     <script>
-        // Mobile menu toggle
+        // ===== JAVASCRIPT FEATURE 1: Mobile Menu Toggle =====
+        // Handles hamburger menu for mobile devices
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.getElementById('nav-menu');
         
@@ -860,13 +861,15 @@
             });
         });
 
-        // Smooth scrolling for navigation links
+        // ===== JAVASCRIPT FEATURE 2: Smooth Scrolling Navigation =====
+        // Enables smooth scrolling to sections when clicking nav links
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
                 
+                // Smooth scroll to target section
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -874,13 +877,15 @@
             });
         });
 
-        // Active navigation link on scroll
+        // ===== JAVASCRIPT FEATURE 3: Active Navigation Link on Scroll =====
+        // Updates active nav link based on current scroll position
         const sections = document.querySelectorAll('section');
         const navbar = document.getElementById('navbar');
         
         window.addEventListener('scroll', () => {
             let current = '';
             
+            // Determine which section is currently in view
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
@@ -889,6 +894,7 @@
                 }
             });
             
+            // Update active class on navigation links
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
@@ -896,7 +902,7 @@
                 }
             });
 
-            // Add shadow to navbar on scroll
+            // Add shadow effect to navbar when scrolling
             if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
             } else {
@@ -904,10 +910,12 @@
             }
         });
 
-        // Scroll to top button
+        // ===== JAVASCRIPT FEATURE 4: Scroll to Top Button =====
+        // Shows/hides scroll-to-top button and handles click
         const scrollTopBtn = document.getElementById('scrollTop');
         
         window.addEventListener('scroll', () => {
+            // Show button after scrolling 300px down
             if (window.scrollY > 300) {
                 scrollTopBtn.classList.add('visible');
             } else {
@@ -915,6 +923,7 @@
             }
         });
         
+        // Scroll to top when button is clicked
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -922,24 +931,27 @@
             });
         });
 
-        // Contact form submission
+        // ===== JAVASCRIPT FEATURE 5: Contact Form Submission =====
+        // Handles form submission with validation and user feedback
         const contactForm = document.getElementById('contact-form');
         
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Prevent default form submission
             
+            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Show success message
+            // Show success message to user
             alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
             
-            // Reset form
+            // Reset form fields
             contactForm.reset();
         });
 
-        // CTA button smooth scroll
+        // ===== JAVASCRIPT FEATURE 6: CTA Button Smooth Scroll =====
+        // Scrolls to projects section when "View My Work" button is clicked
         document.querySelector('.cta-button').addEventListener('click', (e) => {
             e.preventDefault();
             document.querySelector('#projects').scrollIntoView({
