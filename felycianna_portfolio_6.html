@@ -232,7 +232,6 @@
         #projects {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 5rem 1.5rem;
-            min-height: auto;
         }
 
         .section-title {
@@ -242,8 +241,9 @@
             color: var(--primary);
             font-weight: 700;
             position: relative;
-            display: block;
-            width: 100%;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .section-title::after {
@@ -262,8 +262,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
-            width: 100%;
+            margin-top: 1rem;
         }
 
         .project-card {
@@ -272,6 +271,13 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .project-card:hover {
@@ -654,10 +660,6 @@
                 padding: 5rem 1rem 3rem;
             }
 
-            #projects {
-                padding: 3rem 1rem;
-            }
-
             .projects-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -700,18 +702,6 @@
             .about-text h2 {
                 font-size: 2rem;
             }
-
-            .project-content {
-                padding: 1.2rem;
-            }
-
-            .project-card h3 {
-                font-size: 1.2rem;
-            }
-
-            .project-card p {
-                font-size: 0.95rem;
-            }
         }
     </style>
 </head>
@@ -735,8 +725,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-image">
-                    <img src="https://i.ibb.co/YF94nf5/felycianna-pict.jpg" alt="Felycianna Entang" class="hero-profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="hero-profile-placeholder" style="display:none;">FE</div>
+                    <img src="felycianna-pict.jpg" alt="Felycianna Entang" class="hero-profile-img">
                 </div>
                 <h1>Felycianna Entang</h1>
                 <p class="subtitle">Student | Aspiring Developer</p>
@@ -752,26 +741,29 @@
             <h2 class="section-title">My Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
+                    <!-- Replace placeholder with actual image: <img src="project1.jpg" alt="UNIMAS Portal" class="project-img"> -->
                     <div class="project-placeholder">📱</div>
                     <div class="project-content">
                         <h3>UNIMAS Student Portal Redesign</h3>
-                        <p>A modern redesign concept for the UNIMAS student portal with improved UI/UX, featuring streamlined course registration, grade viewing, and campus event notifications. Built with responsive design principles for seamless mobile access.</p>
+                        <p>A modern redesign concept for the UNIMAS student portal with improved UI/UX, featuring streamlined course registration, grade viewing, and campus event notifications.</p>
                         <a href="#" class="project-link">View Project</a>
                     </div>
                 </div>
                 <div class="project-card">
+                    <!-- Replace placeholder with actual image: <img src="project2.jpg" alt="Event System" class="project-img"> -->
                     <div class="project-placeholder">📅</div>
                     <div class="project-content">
-                        <h3>Campus Event Management System</h3>
-                        <p>An event management platform designed specifically for UNIMAS clubs and societies. Features include event creation, RSVP tracking, automated reminders, and integration with the campus calendar system.</p>
+                        <h3>Campus Event Management</h3>
+                        <p>An event management platform designed for UNIMAS clubs and societies with event creation, RSVP tracking, automated reminders, and calendar integration.</p>
                         <a href="#" class="project-link">View Project</a>
                     </div>
                 </div>
                 <div class="project-card">
+                    <!-- Replace placeholder with actual image: <img src="project3.jpg" alt="Finance Tracker" class="project-img"> -->
                     <div class="project-placeholder">💰</div>
                     <div class="project-content">
                         <h3>Personal Finance Tracker</h3>
-                        <p>A minimalist web application that helps students track expenses, set budgets, and visualize spending patterns. Features interactive charts, category-based budgeting, and monthly financial summaries.</p>
+                        <p>A minimalist web application that helps students track expenses, set budgets, and visualize spending patterns with interactive charts and monthly summaries.</p>
                         <a href="#" class="project-link">View Project</a>
                     </div>
                 </div>
@@ -797,8 +789,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://i.ibb.co/VcPyWkR/fely-pict2.jpg" alt="Felycianna Entang profile" class="about-profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="profile-placeholder" style="display:none;">FE</div>
+                    <img src="fely-pict2.jpg" alt="Felycianna Entang profile" class="about-profile-img">
                 </div>
             </div>
         </div>
@@ -844,8 +835,7 @@
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
 
     <script>
-        // ===== JAVASCRIPT FEATURE 1: Mobile Menu Toggle =====
-        // Handles hamburger menu for mobile devices
+        // Mobile menu toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.getElementById('nav-menu');
         
@@ -861,15 +851,13 @@
             });
         });
 
-        // ===== JAVASCRIPT FEATURE 2: Smooth Scrolling Navigation =====
-        // Enables smooth scrolling to sections when clicking nav links
+        // Smooth scrolling for navigation links
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
                 
-                // Smooth scroll to target section
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -877,15 +865,13 @@
             });
         });
 
-        // ===== JAVASCRIPT FEATURE 3: Active Navigation Link on Scroll =====
-        // Updates active nav link based on current scroll position
+        // Active navigation link on scroll
         const sections = document.querySelectorAll('section');
         const navbar = document.getElementById('navbar');
         
         window.addEventListener('scroll', () => {
             let current = '';
             
-            // Determine which section is currently in view
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
@@ -894,7 +880,6 @@
                 }
             });
             
-            // Update active class on navigation links
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
@@ -902,7 +887,7 @@
                 }
             });
 
-            // Add shadow effect to navbar when scrolling
+            // Add shadow to navbar on scroll
             if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
             } else {
@@ -910,12 +895,30 @@
             }
         });
 
-        // ===== JAVASCRIPT FEATURE 4: Scroll to Top Button =====
-        // Shows/hides scroll-to-top button and handles click
+        // Intersection Observer for project cards animation
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        projectCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+
+        // Scroll to top button
         const scrollTopBtn = document.getElementById('scrollTop');
         
         window.addEventListener('scroll', () => {
-            // Show button after scrolling 300px down
             if (window.scrollY > 300) {
                 scrollTopBtn.classList.add('visible');
             } else {
@@ -923,7 +926,6 @@
             }
         });
         
-        // Scroll to top when button is clicked
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -931,28 +933,25 @@
             });
         });
 
-        // ===== JAVASCRIPT FEATURE 5: Contact Form Submission =====
-        // Handles form submission with validation and user feedback
+        // Contact form submission
         const contactForm = document.getElementById('contact-form');
         
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
             
-            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Show success message to user
+            // Show success message
             alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
             
-            // Reset form fields
+            // Reset form
             contactForm.reset();
         });
 
-        // ===== JAVASCRIPT FEATURE 6: CTA Button Smooth Scroll =====
-        // Scrolls to projects section when "View My Work" button is clicked
-        document.querySelector('.cta-button').addEventListener('click', (e) => {
+        // CTA button smooth scroll
+                    document.querySelector('.cta-button').addEventListener('click', (e) => {
             e.preventDefault();
             document.querySelector('#projects').scrollIntoView({
                 behavior: 'smooth'
