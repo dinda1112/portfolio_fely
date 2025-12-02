@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -616,6 +617,79 @@
             box-shadow: 0 8px 25px rgba(248, 165, 194, 0.5);
         }
 
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 25px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: var(--accent2);
+    transform: rotate(90deg);
+}
+
+.modal-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.modal-img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
         /* Responsive Design */
         @media (max-width: 968px) {
             .about-content {
@@ -738,6 +812,87 @@
             .about-text h2 {
                 font-size: 2rem;
             }
+
+            /* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 25px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: var(--accent2);
+    transform: rotate(90deg);
+}
+
+.modal-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.modal-img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .close-modal {
+        font-size: 2rem;
+    }
+}
         }
     </style>
 </head>
@@ -781,7 +936,7 @@
                     <div class="project-content">
                         <h3>Math Game Website</h3>
                         <p>A modern redesign concept for the UNIMAS student portal with improved UI/UX, featuring streamlined course registration, grade viewing, and campus event notifications.</p>
-                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">Preview</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -789,7 +944,7 @@
                     <div class="project-content">
                         <h3>Car Rental Website</h3>
                         <p>An event management platform designed for UNIMAS clubs and societies with event creation, RSVP tracking, automated reminders, and calendar integration.</p>
-                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">Preview</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -797,7 +952,7 @@
                     <div class="project-content">
                         <h3>Apps Design for KUTS</h3>
                         <p>A minimalist web application that helps students track expenses, set budgets, and visualize spending patterns with interactive charts and monthly summaries.</p>
-                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">Preview</a>
                     </div>
                 </div>
             </div>
@@ -866,6 +1021,18 @@
 
     <!-- Scroll to Top Button -->
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <!-- Modal for project preview -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-images">
+                <img src="" alt="Project preview 1" class="modal-img">
+                <img src="" alt="Project preview 2" class="modal-img">
+                <img src="" alt="Project preview 3" class="modal-img">
+            </div>
+        </div>
+    </div>
 
     <script>
         // Mobile menu toggle
@@ -991,6 +1158,57 @@
             if (heroContent) {
                 heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
                 heroContent.style.opacity = 1 - (scrolled / 600);
+            }
+        });
+
+        // Project preview modal
+        const modal = document.getElementById('projectModal');
+        const modalImages = modal.querySelectorAll('.modal-img');
+        const closeModal = document.querySelector('.close-modal');
+        const previewLinks = document.querySelectorAll('.project-link');
+
+        // Project images data (add your actual image paths here)
+        const projectImages = {
+            0: ['portal1.jpg', 'portal2.jpg', 'portal3.jpg'],        // Math Game
+            1: ['campus1.jpg', 'campus2.jpg', 'campus3.jpg'],        // Car Rental
+            2: ['finance1.jpg', 'finance2.jpg', 'finance3.jpg']      // KUTS App
+        };
+
+        previewLinks.forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Set images for this project
+                const images = projectImages[index];
+                modalImages.forEach((img, i) => {
+                    img.src = images[i];
+                });
+                
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
             }
         });
     </script>
