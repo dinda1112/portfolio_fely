@@ -876,6 +876,13 @@
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
+            
+.modal-img.mobile {
+    width: 5%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+}            
 
 @keyframes fadeIn {
     from {
@@ -1176,22 +1183,30 @@
             1: ['zoom1.jpeg', 'zoom2.jpeg', 'zoom3.jpeg'],        // Car Rental
             2: ['kuts1.jpeg', 'kuts2.jpeg', 'kuts3.jpeg']      // KUTS App
         };
-
-        previewLinks.forEach((link, index) => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Set images for this project
-                const images = projectImages[index];
-                modalImages.forEach((img, i) => {
-                    img.src = images[i];
-                });
-                
-                // Show modal
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
+        
+       previewLinks.forEach((link, index) => {
+       link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Set images for this project
+        const images = projectImages[index];
+        modalImages.forEach((img, i) => {
+            img.src = images[i];
+            
+            // Add mobile class only for KUTS app (index 2)
+            if (index === 2) {
+                img.classList.add('mobile');
+            } else {
+                img.classList.remove('mobile');
+            }
         });
+        
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
+    
 
         // Close modal
         closeModal.addEventListener('click', () => {
